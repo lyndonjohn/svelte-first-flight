@@ -1,57 +1,27 @@
 <script>
-	let firstName = 'John';
-	let lastName = 'Doe';
-	let beltColor = 'black';
-
-	// Reactive value
-	$: fullname = `${firstName} ${lastName}`;
-	$: {
-		console.log(fullname);
-		console.log(beltColor);
-	}
-
-	const handleClick = () => {
-		if(beltColor === 'black') {
-			beltColor = 'green';
-		} else {
-			beltColor = 'black';
-		}
-	}
-
-	const handleInput = (e) => {
-		beltColor = e.target.value;
-	}
+	let people = [
+		{ name: 'jose', beltColor: 'black', age: 24, id: 1},
+		{ name: 'andrei', beltColor: 'green', age: 20, id: 2},
+		{ name: 'micah', beltColor: 'white', age: 17, id: 3},
+	];
 </script>
 
 <main>
-	<h1>Hello {fullname}!</h1>
-	<p><span>{beltColor}</span> belt.</p>
-
-	<button on:click={handleClick}>Change belt color.</button>
-	<!-- <div style="margin-top: 1em;">
-		<div>One-way data binding.</div>
-		<input type="text" on:input={handleInput}>
-	</div> -->
-	<div>
-		<input type="text" bind:value={firstName}>
-		<input type="text" bind:value={lastName}>
-		<input type="text" bind:value={beltColor}>
-	</div>
+	<ul>
+		{#each people as {id, name, beltColor} (id)}
+			<li>{id}. {name} - {beltColor}</li>
+		{:else}
+			<li>no people to show...</li>
+		{/each}
+	</ul>
 </main>
 
 <style>
 	main {
-		text-align: center;
+		text-align: justify;
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
 	}
 
 	@media (min-width: 640px) {
