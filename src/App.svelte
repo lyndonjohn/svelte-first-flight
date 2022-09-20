@@ -4,12 +4,19 @@
 		{ name: 'andrei', beltColor: 'green', age: 20, id: 2},
 		{ name: 'micah', beltColor: 'white', age: 17, id: 3},
 	];
+
+	const handleClick = (id) => {
+		people = people.filter((person) => person.id != id);
+	}
 </script>
 
 <main>
 	<ul>
 		{#each people as {id, name, beltColor} (id)}
-			<li>{id}. {name} - {beltColor}</li>
+			<li>
+				{id}. {name} - {beltColor}
+				<button on:click={() => handleClick(id)}>Delete</button>
+			</li>
 		{:else}
 			<li>no people to show...</li>
 		{/each}
